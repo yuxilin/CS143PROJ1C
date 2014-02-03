@@ -167,7 +167,10 @@
     $db_connection = mysql_connect("localhost", "cs143", "");
     mysql_select_db("CS143", $db_connection);
 
-    $person_id = mysqL_query("SELECT id FROM MaxPersonID;", $db_connection) + 1;
+    $result_person = mysqL_query("SELECT id FROM MaxPersonID;", $db_connection);
+    $row = mysql_fetch_assoc($result_person);
+    $person_id = $row['id'] + 1;
+
     print "ID:" . $person_id . "<br />";
 
     if($profession == "director")
@@ -189,7 +192,7 @@
         print "<h1>Something Went Wrong!</h1>";
     }
 
-    mysqL_query("UPDATE MaxPersonID SET id=$person_id");
+    mysqL_query("UPDATE MaxPersonID SET id=$person_id", $db_connection);
 
     mysql_close($db_connection);
 ?>
