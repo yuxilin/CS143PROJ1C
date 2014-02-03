@@ -170,15 +170,15 @@
     $person_id = mysqL_query("SELECT id FROM MaxPersonID") + 1;
     print $person_id;
 
-    if($profession == "Director")
+    if($profession == "director")
     {
         $query = "INSERT INTO Director VALUES($person_id, $last_name, $first_name, $dob, $dod)";
         print "<h1>Inserted Director</h1>";
     }
-    else if($profession == "Actor")
+    else if($profession == "actor")
     {
         $query = "INSERT INTO Actor VALUES($person_id, $last_name, $first_name, $dob, $dod)";
-        print "<h1>Inserted Director Actor</h1>";
+        print "<h1>Inserted Actor</h1>";
     }
     else
     {
