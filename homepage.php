@@ -18,9 +18,9 @@
                 <li><a href="">ADD SOMEONE IMPORTANT</a></li>
                 <li><a href="">ADD MOVIE</a></li>
                 <li><a href="">IN YOUR OPINION...</a></li>
-
             </ul>
         </div>
+        
 	<div id="maincontent">ADD ACTOR/DIRECTOR<br />
         
         <form action="homepage.php" method="post">
@@ -28,6 +28,11 @@
             <select name="profession">
               <option value="actor">Actor</option>
               <option value="director">Director</option>
+            </select> 
+            
+            <select name="sex">
+              <option value="Female">Female</option>
+              <option value="Male">Male</option>
             </select> <br />
 
             <input type="text" name="fname" onfocus="if(this.value == 'First Name') { this.value = ''; }"  value="First Name" required>
@@ -142,25 +147,33 @@
         </form>
     </div>
 <?php
+    /////////////////////////////////////////////////////
+    //*************************************************//
+    //************getting variables********************//
+    //*************************************************//
+    /////////////////////////////////////////////////////
     $profession = $_POST["profession"];
+    $sex = $_POST["sex"];
     $first_name = $_POST["fname"];
     $last_name = $_POST["lname"];
 
-    $month_of_birth = $_POST["mbirth"];
-    $day_of_birth = $_POST["dbirth"];
-    $year_of_birth = $_POST["ybirth"];
+    print "LAST NAME: " . $last_name . "<br />";
+
+    $month_of_birth = $_POST["month_of_birth"];
+    $day_of_birth = $_POST["day_of_birth"];
+    $year_of_birth = $_POST["year_of_birth"];
     $dob = $year_of_birth."-".$month_of_birth."-".$day_of_birth;
 
-    $month_of_death= $_POST["mdeath"];
-    $day_of_death = $_POST["ddeath"];
-    $year_of_death = $_POST["ydeath"];
+    $month_of_death= $_POST["month_of_death"];
+    $day_of_death = $_POST["day_of_death"];
+    $year_of_death = $_POST["year_of_death"];
     if($month_of_death == "na" || $day_of_death == "na" || $year_of_death == "" || $year_of_death == "Year")
     {
-        $dod = NULL;
+        $dod = NULL; //'NULL' WILL ENTER AS 0000-00-00
     }
     else
     {
-        $dod = $year_of_death."-".$month_of_death."-".$day_of_death;
+        $dod = "'" .$year_of_death."-".$month_of_death."-".$day_of_death. "'"; //NEED TO FIX DOD IF NULL && ERROR CHECK DOB<DOD
     }
 
 
@@ -169,22 +182,24 @@
 
     $result_person = mysqL_query("SELECT id FROM MaxPersonID;", $db_connection);
     $row = mysql_fetch_assoc($result_person);
-    $person_id = $row['id'] + 1;
 
-    print "ID:" . $person_id . "<br />";
 
     if($profession == "director")
     {
-        $query = "INSERT INTO Director VALUES($person_id, $last_name, $first_name, $dob, $dod);";
-        $result = mysql_query($query, $db_connection);
-
+        $person_id = $row['id'] + 1;
+        $query = "INSERT INTO Director VALUES($person_id, '$last_name', '$first_name', '$dob', '$dod');";
+        $result = mysql_query($query, $db_connection) or die( "Error: " . mysql_error());
+        mysqL_query("UPDATE MaxPersonID SET id=$person_id", $db_connection);
         print "<h1>Inserted Director</h1>";
     }
     else if($profession == "actor")
     {
-        $query = "INSERT INTO Actor VALUES($person_id, $last_name, $first_name, $dob, $dod);";
-        $result = mysql_query($query, $db_connection);
-        var_dump($result);
+        $person_id = $row['id'] + 1;
+        $query = "INSERT INTO Actor VALUES($person_id, '$last_name', '$first_name', '$sex', '$dob', $dod);";
+        $result = mysql_query($query, $db_connection) or die( "Error: " . mysql_error());
+       
+        mysqL_query("UPDATE MaxPersonID SET id=$person_id", $db_connection);
+
         print "<h1>Inserted Actor</h1>";
     }
     else
@@ -192,7 +207,7 @@
         print "<h1>Something Went Wrong!</h1>";
     }
 
-    mysqL_query("UPDATE MaxPersonID SET id=$person_id", $db_connection);
+
 
     mysql_close($db_connection);
 ?>
