@@ -167,17 +167,21 @@
     $db_connection = mysql_connect("localhost", "cs143", "");
     mysql_select_db("CS143", $db_connection);
 
-    $person_id = mysqL_query("SELECT id FROM MaxPersonID") + 1;
-    print $person_id;
+    $person_id = mysqL_query("SELECT id FROM MaxPersonID;", $db_connection) + 1;
+    print "ID:" . $person_id . "<br />";
 
     if($profession == "director")
     {
-        $query = "INSERT INTO Director VALUES($person_id, $last_name, $first_name, $dob, $dod)";
+        $query = "INSERT INTO Director VALUES($person_id, $last_name, $first_name, $dob, $dod);";
+        $result = mysql_query($query, $db_connection);
+
         print "<h1>Inserted Director</h1>";
     }
     else if($profession == "actor")
     {
-        $query = "INSERT INTO Actor VALUES($person_id, $last_name, $first_name, $dob, $dod)";
+        $query = "INSERT INTO Actor VALUES($person_id, $last_name, $first_name, $dob, $dod);";
+        $result = mysql_query($query, $db_connection);
+        var_dump($result);
         print "<h1>Inserted Actor</h1>";
     }
     else
