@@ -173,7 +173,7 @@
     }
     else
     {
-        $dod = "'" .$year_of_death."-".$month_of_death."-".$day_of_death. "'"; //NEED TO FIX DOD IF NULL && ERROR CHECK DOB<DOD
+        $dod = $year_of_death."-".$month_of_death."-".$day_of_death; //NEED TO FIX DOD IF NULL && ERROR CHECK DOB<DOD
     }
 
 
@@ -187,17 +187,32 @@
     if($profession == "director")
     {
         $person_id = $row['id'] + 1;
-        $query = "INSERT INTO Director VALUES($person_id, '$last_name', '$first_name', '$dob', '$dod');";
-        $result = mysql_query($query, $db_connection) or die( "Error: " . mysql_error());
+        if($dod == NULL)
+        {   
+            $query = "INSERT INTO Director (id, last, first, dob) VALUES($person_id, '$last_name', '$first_name', '$dob');";
+            $result = mysql_query($query, $db_connection) or die( "Error: " . mysql_error());
+        }
+        else
+        {
+            $query = "INSERT INTO Director VALUES($person_id, '$last_name', '$first_name', '$dob', '$dod');";
+            $result = mysql_query($query, $db_connection) or die( "Error: " . mysql_error());   
+        }
         mysqL_query("UPDATE MaxPersonID SET id=$person_id", $db_connection);
         print "<h1>Inserted Director</h1>";
     }
     else if($profession == "actor")
     {
         $person_id = $row['id'] + 1;
-        $query = "INSERT INTO Actor VALUES($person_id, '$last_name', '$first_name', '$sex', '$dob', $dod);";
-        $result = mysql_query($query, $db_connection) or die( "Error: " . mysql_error());
-       
+        if($dod == NULL)
+        {
+            $query = "INSERT INTO Actor (id, last, first, sex, dob) VALUES($person_id, '$last_name', '$first_name', '$sex', '$dob');";
+            $result = mysql_query($query, $db_connection) or die( "Error: " . mysql_error());
+        }
+        else
+        { 
+            $query = "INSERT INTO Actor VALUES($person_id, '$last_name', '$first_name', '$sex', '$dob', '$dod');";
+            $result = mysql_query($query, $db_connection) or die( "Error: " . mysql_error());   
+        }  
         mysqL_query("UPDATE MaxPersonID SET id=$person_id", $db_connection);
 
         print "<h1>Inserted Actor</h1>";
