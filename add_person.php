@@ -17,14 +17,14 @@
                 <li><a href="">ACTORS+MOVIES</a></li>
                 <li><a href="">DIRECTORS+MOVIES</a></li>
                 <li><a href="add_person.php">ADD PEOPLE</a></li>
-                <li><a href="">ADD MOVIE</a></li>
+                <li><a href="add_movie.php">ADD MOVIE</a></li>
                 <li><a href="">IN YOUR OPINION...</a></li>
             </ul>
         </div>
         
 	<div id="maincontent">ADD ACTOR/DIRECTOR<br />
         
-        <form action="homepage.php" method="post">
+        <form action="add_person.php" method="post">
 
             <select name="profession">
               <option value="actor">Actor</option>
@@ -89,7 +89,7 @@
                     <option value="30">30</option>
                     <option value="31">31</option>
                 </select>
-                <input type="text" name="year_of_birth" value="Year" maxlength="4" type="number" required>
+                <input type="text" name="year_of_birth" value="Year" maxlength="4" type="number" onfocus="if(this.value == 'Year') { this.value = ''; }" required>
             </select> <br />
         Date of Death: <select name="month_of_death" onchange="return wait_for_load(this, event, function() { editor_date_month_change(this, 'birthday_day','birthday_year'); });">
                     <option value="na">Month</option>
@@ -142,7 +142,7 @@
                     <option value="31">31</option>
                 </select>
 
-                <input type="text" name="year_of_death" value="Year" maxlength="4" type="number">
+                <input type="text" name="year_of_death" value="Year" maxlength="4" type="number" onfocus="if(this.value == 'Year') { this.value = ''; }">
             </select> <br />
         <input type="submit" value="Submit">
         </form>
