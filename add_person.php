@@ -10,12 +10,13 @@
 	<div id="divider"></div>
 	<div id="nav-sidebar">MAP
             <ul id="nav-options">
+                <li><a href="homepage.php">HOME</a></li>
                 <li><a href="">SEARCH</a></li>
                 <li><a href="">PEOPLE DIRECTORY</a></li>
                 <li><a href="">MOVIE DIRECTORY</a></li>
                 <li><a href="">ACTORS+MOVIES</a></li>
                 <li><a href="">DIRECTORS+MOVIES</a></li>
-                <li><a href="">ADD PEOPLE</a></li>
+                <li><a href="add_person.php">ADD PEOPLE</a></li>
                 <li><a href="">ADD MOVIE</a></li>
                 <li><a href="">IN YOUR OPINION...</a></li>
             </ul>
