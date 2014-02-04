@@ -15,15 +15,15 @@
                 <li><a href="">MOVIE DIRECTORY</a></li>
                 <li><a href="">ACTORS+MOVIES</a></li>
                 <li><a href="">DIRECTORS+MOVIES</a></li>
-                <li><a href="add_person.php">ADD PEOPLE</a></li>
+                <li><a href="">ADD PEOPLE</a></li>
                 <li><a href="">ADD MOVIE</a></li>
                 <li><a href="">IN YOUR OPINION...</a></li>
             </ul>
         </div>
-       
-  <!--  	<div id="maincontent">ADD ACTOR/DIRECTOR<br />
         
-    <form action="homepage.php" method="post">
+	<div id="maincontent">ADD ACTOR/DIRECTOR<br />
+        
+        <form action="homepage.php" method="post">
 
             <select name="profession">
               <option value="actor">Actor</option>
@@ -145,14 +145,14 @@
             </select> <br />
         <input type="submit" value="Submit">
         </form>
-    </div> -->
+    </div>
 <?php
     /////////////////////////////////////////////////////
     //*************************************************//
     //************getting variables********************//
     //*************************************************//
     /////////////////////////////////////////////////////
- /*   $profession = $_POST["profession"];
+    $profession = $_POST["profession"];
     $sex = $_POST["sex"];
     $first_name = $_POST["fname"];
     $last_name = $_POST["lname"];
@@ -224,7 +224,7 @@
 
 
 
-    mysql_close($db_connection); */
+    mysql_close($db_connection);
 ?>
 </body>
 
