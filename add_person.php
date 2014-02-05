@@ -32,10 +32,9 @@
         <form action="add_person.php" method="post">
 
             <div class="separator">
-            <input class="styled-tbox" type="text" name="fname" onfocus="if(this.value == 'First Name') { this.value = ''; }"  value="First Name" required>
-            <input class="styled-tbox" type="text" name="lname" onfocus="if(this.value == 'Last Name') { this.value = ''; }"  value="Last Name" required>
-
-            Date of Birth: <select class="styled-select" name="month_of_birth" onchange="return wait_for_load(this, event, function() { editor_date_month_change(this, 'birthday_day','birthday_year'); });" required>
+                <input class="styled-tbox" type="text" name="fname" onfocus="if(this.value == 'First Name') { this.value = ''; }"  value="First Name" required>
+                <input class="styled-tbox" type="text" name="lname" onfocus="if(this.value == 'Last Name') { this.value = ''; }"  value="Last Name" required>
+                Date of Birth: <select class="styled-select" name="month_of_birth" onchange="return wait_for_load(this, event, function() { editor_date_month_change(this, 'birthday_day','birthday_year'); });" required>
                     <option value="na">Month</option>
                     <option value="1">January</option>
                     <option value="2">February</option>
@@ -50,7 +49,6 @@
                     <option value="11">November</option>
                     <option value="12">December</option>
                 </select>
-
                 <select class="styled-select" name="day_of_birth" required>
                     <option value="na">Day</option>
                     <option value="1">1</option>
@@ -86,21 +84,19 @@
                     <option value="31">31</option>
                 </select>
                 <input class="styled-tbox" type="text" name="year_of_birth" value="Year" maxlength="4" type="number" onfocus="if(this.value == 'Year') { this.value = ''; }" required>
-            </select> <br />
+                <!-- </select> -->
             </div>
 
             <div class="separator">
-            <select class="styled-select" name="profession">
-              <option value="actor">Actor</option>
-              <option value="director">Director</option>
-            </select>             
-
-            <select class="styled-select" name="sex">
-              <option value="Female">Female</option>
-              <option value="Male">Male</option>
-            </select>
-
-        Date of Death: <select class="styled-select" name="month_of_death" onchange="return wait_for_load(this, event, function() { editor_date_month_change(this, 'birthday_day','birthday_year'); });">
+                <select class="styled-select" name="profession">
+                    <option value="actor">Actor</option>
+                    <option value="director">Director</option>
+                </select>             
+                <select class="styled-select" name="sex">
+                    <option value="Female">Female</option>
+                    <option value="Male">Male</option>
+                </select>
+                Date of Death: <select class="styled-select" name="month_of_death" onchange="return wait_for_load(this, event, function() { editor_date_month_change(this, 'birthday_day','birthday_year'); });">
                     <option value="na">Month</option>
                     <option value="1">January</option>
                     <option value="2">February</option>
@@ -115,7 +111,6 @@
                     <option value="11">November</option>
                     <option value="12">December</option>
                 </select>
-
                 <select class="styled-select" name="day_of_death">
                     <option value="na">Day</option>
                     <option value="1">1</option>
@@ -150,9 +145,8 @@
                     <option value="30">30</option>
                     <option value="31">31</option>
                 </select>
-
                 <input class="styled-tbox" type="text" name="year_of_death" value="Year" maxlength="4" type="number" onfocus="if(this.value == 'Year') { this.value = ''; }">
-            </select> <br />
+            <!-- </select> <br /> -->
             </div>
             
         <br /><br />
@@ -211,8 +205,14 @@
             $query = "INSERT INTO Director VALUES($person_id, '$last_name', '$first_name', '$dob', '$dod');";
             $result = mysql_query($query, $db_connection) or die( "Error: " . mysql_error());   
         }
-        mysqL_query("UPDATE MaxPersonID SET id=$person_id", $db_connection);
-        print '<h3 style="text-align: center">Inserted Director</h3>';
+
+        if ($result) {
+            print '<h3 style="text-align: center">Inserted Director</h3>';
+            mysqL_query("UPDATE MaxPersonID SET id=$person_id", $db_connection);
+        }
+        else {
+            print '<h3 style="text-align: center">Something Went Wrong! :(</h3>';
+        }
     }
     else if($profession == "actor")
     {
@@ -221,15 +221,22 @@
         {
             $query = "INSERT INTO Actor (id, last, first, sex, dob) VALUES($person_id, '$last_name', '$first_name', '$sex', '$dob');";
             $result = mysql_query($query, $db_connection) or die( "Error: " . mysql_error());
+
         }
         else
         { 
             $query = "INSERT INTO Actor VALUES($person_id, '$last_name', '$first_name', '$sex', '$dob', '$dod');";
-            $result = mysql_query($query, $db_connection) or die( "Error: " . mysql_error());   
+            $result = mysql_query($query, $db_connection) or die( "Error: " . mysql_error()); 
         }  
-        mysqL_query("UPDATE MaxPersonID SET id=$person_id", $db_connection);
+        // var_dump($result);  
+        if ($result) {
+            print '<h3 style="text-align: center">Inserted Actor</h3>';
+            mysqL_query("UPDATE MaxPersonID SET id=$person_id", $db_connection);
+        }
+        else {
+            print '<h3 style="text-align: center">Something Went Wrong! :(</h3>';
+        }
 
-        print '<h3 style="text-align: center">Inserted Actor</h3>';
     }
     else
     {
