@@ -6,7 +6,7 @@
 </head>
 
 <body>
-    <h1 id="header">better than imdb</h1>
+    <h1 id="header">BETTER THAN IMDB</h1>
 	<div id="divider"></div>
 	<div id="nav-sidebar">MAP
             <ul id="nav-options">
@@ -21,7 +21,10 @@
                 <li><a href="">IN YOUR OPINION...</a></li>
             </ul>
         </div>
-    <div id="maincontent"></div>
+    <div id="home-maincontent">
+        <h1>Welcome.</h1>
+
+    </div>
 </body>
 
 

@@ -6,9 +6,10 @@
 </head>
 
 <body>
-    <h1 id="header">better than imdb</h1>
+    <h1 id="header">BETTER THAN IMDB</h1>
 	<div id="divider"></div>
-	<div id="nav-sidebar">MAP
+	<div id="nav-sidebar">
+        <h2>MAP</h2>
             <ul id="nav-options">
                 <li><a href="homepage.php">HOME</a></li>
                 <li><a href="">SEARCH</a></li>
@@ -22,24 +23,84 @@
             </ul>
         </div>
         
-	<div id="maincontent">ADD ACTOR/DIRECTOR<br />
+	<div id="maincontent">
         
+        <h2 style="text-align: center;">
+        ADD ACTOR/DIRECTOR
+        </h2>
+                <br />        <br /> 
         <form action="add_person.php" method="post">
 
-            <select name="profession">
+            <div class="separator">
+            <input class="styled-tbox" type="text" name="fname" onfocus="if(this.value == 'First Name') { this.value = ''; }"  value="First Name" required>
+            <input class="styled-tbox" type="text" name="lname" onfocus="if(this.value == 'Last Name') { this.value = ''; }"  value="Last Name" required>
+
+            Date of Birth: <select class="styled-select" name="month_of_birth" onchange="return wait_for_load(this, event, function() { editor_date_month_change(this, 'birthday_day','birthday_year'); });" required>
+                    <option value="na">Month</option>
+                    <option value="1">January</option>
+                    <option value="2">February</option>
+                    <option value="3">March</option>
+                    <option value="4">April</option>
+                    <option value="5">May</option>
+                    <option value="6">June</option>
+                    <option value="7">July</option>
+                    <option value="8">August</option>
+                    <option value="9">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
+
+                <select class="styled-select" name="day_of_birth" required>
+                    <option value="na">Day</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                    <option value="25">25</option>
+                    <option value="26">26</option>
+                    <option value="27">27</option>
+                    <option value="28">28</option>
+                    <option value="29">29</option>
+                    <option value="30">30</option>
+                    <option value="31">31</option>
+                </select>
+                <input class="styled-tbox" type="text" name="year_of_birth" value="Year" maxlength="4" type="number" onfocus="if(this.value == 'Year') { this.value = ''; }" required>
+            </select> <br />
+            </div>
+
+            <div class="separator">
+            <select class="styled-select" name="profession">
               <option value="actor">Actor</option>
               <option value="director">Director</option>
-            </select> 
-            
-            <select name="sex">
+            </select>             
+
+            <select class="styled-select" name="sex">
               <option value="Female">Female</option>
               <option value="Male">Male</option>
-            </select> <br />
+            </select>
 
-            <input type="text" name="fname" onfocus="if(this.value == 'First Name') { this.value = ''; }"  value="First Name" required>
-            <input type="text" name="lname" onfocus="if(this.value == 'Last Name') { this.value = ''; }"  value="Last Name" required><br>
-
-            Date of Birth: <select name="month_of_birth" onchange="return wait_for_load(this, event, function() { editor_date_month_change(this, 'birthday_day','birthday_year'); });" required>
+        Date of Death: <select class="styled-select" name="month_of_death" onchange="return wait_for_load(this, event, function() { editor_date_month_change(this, 'birthday_day','birthday_year'); });">
                     <option value="na">Month</option>
                     <option value="1">January</option>
                     <option value="2">February</option>
@@ -55,59 +116,7 @@
                     <option value="12">December</option>
                 </select>
 
-                <select name="day_of_birth" required>
-                    <option value="na">Day</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                    <option value="12">12</option>
-                    <option value="13">13</option>
-                    <option value="14">14</option>
-                    <option value="15">15</option>
-                    <option value="16">16</option>
-                    <option value="17">17</option>
-                    <option value="18">18</option>
-                    <option value="19">19</option>
-                    <option value="20">20</option>
-                    <option value="21">21</option>
-                    <option value="22">22</option>
-                    <option value="23">23</option>
-                    <option value="24">24</option>
-                    <option value="25">25</option>
-                    <option value="26">26</option>
-                    <option value="27">27</option>
-                    <option value="28">28</option>
-                    <option value="29">29</option>
-                    <option value="30">30</option>
-                    <option value="31">31</option>
-                </select>
-                <input type="text" name="year_of_birth" value="Year" maxlength="4" type="number" onfocus="if(this.value == 'Year') { this.value = ''; }" required>
-            </select> <br />
-        Date of Death: <select name="month_of_death" onchange="return wait_for_load(this, event, function() { editor_date_month_change(this, 'birthday_day','birthday_year'); });">
-                    <option value="na">Month</option>
-                    <option value="1">January</option>
-                    <option value="2">February</option>
-                    <option value="3">March</option>
-                    <option value="4">April</option>
-                    <option value="5">May</option>
-                    <option value="6">June</option>
-                    <option value="7">July</option>
-                    <option value="8">August</option>
-                    <option value="9">September</option>
-                    <option value="10">October</option>
-                    <option value="11">November</option>
-                    <option value="12">December</option>
-                </select>
-
-                <select name="day_of_death">
+                <select class="styled-select" name="day_of_death">
                     <option value="na">Day</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -142,11 +151,16 @@
                     <option value="31">31</option>
                 </select>
 
-                <input type="text" name="year_of_death" value="Year" maxlength="4" type="number" onfocus="if(this.value == 'Year') { this.value = ''; }">
+                <input class="styled-tbox" type="text" name="year_of_death" value="Year" maxlength="4" type="number" onfocus="if(this.value == 'Year') { this.value = ''; }">
             </select> <br />
-        <input type="submit" value="Submit">
-        </form>
-    </div>
+            </div>
+            
+        <br /><br />
+        <div class="separator">
+            <div class="center-align">
+            <input class="styled-submit" type="submit" value="Submit">
+            </div>
+        <br /><br /><br />
 <?php
     /////////////////////////////////////////////////////
     //*************************************************//
@@ -158,7 +172,6 @@
     $first_name = $_POST["fname"];
     $last_name = $_POST["lname"];
 
-    print "LAST NAME: " . $last_name . "<br />";
 
     $month_of_birth = $_POST["month_of_birth"];
     $day_of_birth = $_POST["day_of_birth"];
@@ -199,7 +212,7 @@
             $result = mysql_query($query, $db_connection) or die( "Error: " . mysql_error());   
         }
         mysqL_query("UPDATE MaxPersonID SET id=$person_id", $db_connection);
-        print "<h1>Inserted Director</h1>";
+        print '<h3 style="text-align: center">Inserted Director</h3>';
     }
     else if($profession == "actor")
     {
@@ -216,17 +229,21 @@
         }  
         mysqL_query("UPDATE MaxPersonID SET id=$person_id", $db_connection);
 
-        print "<h1>Inserted Actor</h1>";
+        print '<h3 style="text-align: center">Inserted Actor</h3>';
     }
     else
     {
-        print "<h1>Something Went Wrong!</h1>";
+        print "";
     }
 
 
 
     mysql_close($db_connection);
 ?>
+
+        </div>
+        </form>
+    </div>
 </body>
 
 

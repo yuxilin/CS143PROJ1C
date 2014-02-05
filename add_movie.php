@@ -6,7 +6,7 @@
 </head>
 
 <body>
-    <h1 id="header">better than imdb</h1>
+    <h1 id="header">BETTER THAN IMDB</h1>
 	<div id="divider"></div>
 	<div id="nav-sidebar">MAP
             <ul id="nav-options">
@@ -38,7 +38,7 @@
             </select> 
             <input type="text" name="movie-company" onfocus="if(this.value == 'Movie Company') { this.value = ''; }" maxlength=50 value="Movie Company" required>
             <br />
-                <input type="checkbox" value="Action">Action<br>
+                <input type="checkbox" value="Action">Action<br> 
                 <input type="checkbox" value="Adult">Adult<br>
                 <input type="checkbox" value="Adventure">Adventure<br>
                 <input type="checkbox" value="Animation">Animation<br>
@@ -75,29 +75,35 @@
     $rating = $_POST["rating"];
     $company = $_POST["movie-company"];
     
+    
     $title = ucwords($title);
     $company = ucwords($company);
     
     if($year == "" || $year == "Year")
     {
-        $year = NULL; //'NULL' WILL ENTER AS 0000-00-00
+        $year = NULL; 
     }
 
 
     $db_connection = mysql_connect("localhost", "cs143", "");
     mysql_select_db("CS143", $db_connection);
 
-    $result_movie = mysqL_query("SELECT id FROM MaxMovieID;", $db_connection);
-    $row = mysql_fetch_assoc($result_movie);
-    
-    $movie_id = $row['id'] + 1;
-    mysqL_query("UPDATE MaxMovieID SET id=$movie_id", $db_connection);
-    var_dump ($movie_id);
-    print "<br />";
-    $query = "INSERT INTO Movie VALUES($movie_id, '$title', '$year', '$rating', '$company');";
-    $result = mysql_query($query, $db_connection) or die( "Error: " . mysql_error());
-    print "<h1>Inserted Movie</h1>";
-
+    if ($title != "Movie Title" && $title != "" && $year != "Year") {
+        var_dump ($company);
+        $result_movie = mysqL_query("SELECT id FROM MaxMovieID;", $db_connection);
+        $row = mysql_fetch_assoc($result_movie);
+        $movie_id = $row['id'] + 1;
+        mysqL_query("UPDATE MaxMovieID SET id=$movie_id", $db_connection);
+        //var_dump ($movie_id);
+        //print "<br />";
+        $query = "INSERT INTO Movie VALUES($movie_id, '$title', '$year', '$rating', '$company');";
+        $result = mysql_query($query, $db_connection) or die( "Error: " . mysql_error());
+        print "<h1>Inserted Movie</h1>";
+    }
+    else {
+        print "Please Enter Values";
+    }
+        
 
     mysql_close($db_connection);
 ?>

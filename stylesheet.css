@@ -16,10 +16,45 @@ body {
 	font-size: 18px;
 }
 
+form {
+    font-size: 1.1em;
+        
+}
+
 div, #header {
 	border-radius: 5px;
 	background-color: #000;
 }
+
+.separator {
+    padding: 10px;
+}
+    
+.styled-tbox {
+    width: 120px;
+    height: 30px;
+	border-radius: 0px;
+	background-color: #363636;
+	border-color: #363636;
+    color: white;
+    padding: 5px;
+    }    
+
+.styled-submit {
+	float: center;
+	width: 86%;
+    height: 40px;
+	border-radius: 0px;
+	background-color: #363636;
+	border-color: #363636;
+    color: white;
+    padding: 5px;
+}
+
+.center-align {
+	text-align: center;
+}
+
 
 #divider {
     height: 15px;
@@ -28,13 +63,36 @@ div, #header {
     border-radius: 0px;
 }
 
+.styled-select {
+    padding: 10px 16px;
+    border: none;
+    box-shadow: none;
+    background: #363636;
+    color: white;
+    width: 120px;
+    height: 30px;
+}
+
 #maincontent {
+	text-align: center;
 	position: relative;
 	float: left;
 	width: 66%;
 	height: 700px;
 	margin-left: 20px;
 	padding: 20px;
+}
+
+#home-maincontent {
+	text-align: center;
+	position: relative;
+	float: left;
+	width: 66%;
+	height: 700px;
+	margin-left: 20px;
+	padding: 20px;
+/*background-image: url('minions.jpg');	
+background-size: 100%;*/
 }
 
 #nav-sidebar {
