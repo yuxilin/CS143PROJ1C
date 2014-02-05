@@ -22,8 +22,6 @@
             </ul>
         </div>
     <div id="home-maincontent">
-        <h1>Welcome.</h1>
-
     </div>
 </body>
 

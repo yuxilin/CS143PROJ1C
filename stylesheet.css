@@ -91,10 +91,15 @@ div, #header {
 	height: 700px;
 	margin-left: 20px;
 	padding: 20px;
-/*background-image: url('minions.jpg');	
-background-size: 100%;*/
+	background-image: url('PosterCollage.jpg');	
+	background-size: 100%;
+	background-repeat: no-repeat;
+	opacity: 0.75;
 }
 
+/*#opaque {
+	opacity: 1.0;
+}*/
 .styled-cbox {
 	background: #363636;
 	width: 25px;
