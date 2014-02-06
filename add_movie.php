@@ -146,7 +146,7 @@
         foreach($genreArr as $g)
         {
             $query = "INSERT INTO MovieGenre VALUES($movie_id, '$g');";
-            $$result = mysql_query($query, $db_connection) or die( "Error: " . mysql_error());
+            $result = mysql_query($query, $db_connection) or die( "Error: " . mysql_error());
         }
         // var_dump($result);
         if ($result) {

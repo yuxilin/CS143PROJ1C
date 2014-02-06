@@ -66,9 +66,26 @@
             $movie_name = $_POST["movie"];
             $actor_name = $_POST["actor"];
             $role = $_POST["role"];
-            $mid = mysql_query("SELECT id FROM Movie WHERE title='$movie_name';", $db_connection);
-            $aid = mysql_query("SELECT id FROM Actor WHERE CONCAT(first,' ',last) = '$actor_name';", $db_connection);
-            mysql_query("INSERT INTO MovieActor VALUES($mid, $aid, '$role');", $db_connection);
+
+            $movie_id = mysql_query("SELECT id FROM Movie WHERE title='$movie_name';", $db_connection);
+            $row = mysql_fetch_assoc($movie_id);
+            $mid = $row['id'];
+            // var_dump($mid);
+            print "<br />";
+
+
+            $actor_id = mysql_query("SELECT id FROM Actor WHERE CONCAT(first,' ',last) = '$actor_name';", $db_connection);
+            $row = mysql_fetch_assoc($actor_id);
+            $aid = $row['id'];
+            // var_dump($aid);
+            
+            $result=mysql_query("INSERT INTO MovieActor VALUES($mid, $aid, '$role');", $db_connection);
+            if ($result) {
+                print "<h2>Inserted Movie-Actor Relation</h2>";
+            }
+            else {
+                print "Something Went Wrong! :(";
+            }
             mysql_close($db_connection);
         ?>
     <div/>
