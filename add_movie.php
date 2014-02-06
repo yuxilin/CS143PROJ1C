@@ -44,61 +44,61 @@
             <div class="separator">
                 <ul id="genre-list">
                 <li>
-                    <input type="checkbox" class="styled-cbox" value="Action">Action<br> 
+                    <input type="checkbox" name="genre[]" class="styled-cbox" value="Action">Action<br> 
                 </li>
                 <li>
-                    <input type="checkbox" class="styled-cbox" value="Adult">Adult<br>
+                    <input type="checkbox" name="genre[]" class="styled-cbox" value="Adult">Adult<br>
                 </li>
                 <li>
-                    <input type="checkbox" class="styled-cbox" value="Adventure">Adventure<br>
+                    <input type="checkbox" name="genre[]" class="styled-cbox" value="Adventure">Adventure<br>
                 </li>
                 <li>
-                    <input type="checkbox" class="styled-cbox" value="Animation">Animation<br>
+                    <input type="checkbox" name="genre[]" class="styled-cbox" value="Animation">Animation<br>
                 </li>
                 <li>   
-                    <input type="checkbox" class="styled-cbox" value="Comedy">Comedy<br>
+                    <input type="checkbox" name="genre[]" class="styled-cbox" value="Comedy">Comedy<br>
                 </li>
                 <li>   
-                    <input type="checkbox" class="styled-cbox" value="Crime">Crime<br>
+                    <input type="checkbox" name="genre[]" class="styled-cbox" value="Crime">Crime<br>
                 </li>
                 <li>   
-                    <input type="checkbox" class="styled-cbox" value="Documentary">Documentary<br>
+                    <input type="checkbox" name="genre[]" class="styled-cbox" value="Documentary">Documentary<br>
                 </li>
                 <li>   
-                    <input type="checkbox" class="styled-cbox" value="Drama">Drama<br>
+                    <input type="checkbox" name="genre[]" class="styled-cbox" value="Drama">Drama<br>
                 </li>
                 <li>   
-                    <input type="checkbox" class="styled-cbox" value="Family">Family<br>
+                    <input type="checkbox" name="genre[]" class="styled-cbox" value="Family">Family<br>
                 </li>
                 <li>   
-                    <input type="checkbox" class="styled-cbox" value="Fantasy">Fantasy<br>
+                    <input type="checkbox" name="genre[]" class="styled-cbox" value="Fantasy">Fantasy<br>
                 </li>
                 <li>   
-                    <input type="checkbox" class="styled-cbox" value="Horror">Horror<br>
+                    <input type="checkbox" name="genre[]" class="styled-cbox" value="Horror">Horror<br>
                 </li>
                 <li>   
-                    <input type="checkbox" class="styled-cbox" value="Musical">Musical<br>
+                    <input type="checkbox" name="genre[]" class="styled-cbox" value="Musical">Musical<br>
                 </li>
                 <li>   
-                    <input type="checkbox" class="styled-cbox" value="Mystery">Mystery<br>
+                    <input type="checkbox" name="genre[]" class="styled-cbox" value="Mystery">Mystery<br>
                 </li>
                 <li>   
-                    <input type="checkbox" class="styled-cbox" value="Romance">Romance<br>
+                    <input type="checkbox" name="genre[]" class="styled-cbox" value="Romance">Romance<br>
                 </li>
                 <li>   
-                    <input type="checkbox" class="styled-cbox" value="Sci-fi">Sci-Fi<br>
+                    <input type="checkbox" name="genre[]" class="styled-cbox" value="Sci-fi">Sci-Fi<br>
                 </li>
                 <li>   
-                    <input type="checkbox" class="styled-cbox" value="Short">Short<br>
+                    <input type="checkbox" name="genre[]" class="styled-cbox" value="Short">Short<br>
                 </li>
                 <li>   
-                    <input type="checkbox" class="styled-cbox" value="Thriller">Thriller<br>
+                    <input type="checkbox" name="genre[]" class="styled-cbox" value="Thriller">Thriller<br>
                 </li>
                 <li>   
-                    <input type="checkbox" class="styled-cbox" value="War">War<br>
+                    <input type="checkbox" name="genre[]" class="styled-cbox" value="War">War<br>
                 </li>
                 <li>
-                    <input type="checkbox" class="styled-cbox" value="Western">Western<br>
+                    <input type="checkbox" name="genre[]" class="styled-cbox" value="Western">Western<br>
                 </li>
                 </ul>
             </div>
@@ -119,7 +119,7 @@
     $year = $_POST["movie-year"];
     $rating = $_POST["rating"];
     $company = $_POST["movie-company"];
-    
+    $genreArr = $_POST["genre"];
     
     $title = ucwords($title);
     $company = ucwords($company);
@@ -142,6 +142,12 @@
         //print "<br />";
         $query = "INSERT INTO Movie VALUES($movie_id, '$title', '$year', '$rating', '$company');";
         $result = mysql_query($query, $db_connection) or die( "Error: " . mysql_error());
+
+        foreach($genreArr as $g)
+        {
+            $query = "INSERT INTO MovieGenre VALUES($movie_id, '$g');";
+            $$result = mysql_query($query, $db_connection) or die( "Error: " . mysql_error());
+        }
         // var_dump($result);
         if ($result) {
             print '<h3 style="text-align: center">Inserted Movie</h3>';
