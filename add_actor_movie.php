@@ -33,23 +33,23 @@
 
                 $db_connection = mysql_connect('localhost', 'cs143', '');
                 mysql_select_db('CS143', $db_connection);
-                $result = mysql_query("SELECT title FROM Movie ORDER BY title ASC", $db_connection);
+                $result = mysql_query("SELECT * FROM Movie ORDER BY title ASC", $db_connection);
 
                 echo "Select Movie: ";
                 echo "<select name='movie' class='styled-select'>";
                 while ($row = mysql_fetch_array($result)) {
-                    echo "<option value='" . $row['title'] . "'>" . $row['title'] . "</option>";
+                    echo "<option value='" . $row['id'] . "'>" . $row['title'] . ' ' . '('. $row['year'] . ')' . "</option>";
                 }
                 echo "</select>";
                 echo "<br />";
 
                 
-                $result = mysql_query("SELECT CONCAT(first, ' ', last) AS name FROM Actor ORDER BY name ASC", $db_connection);
+                $result = mysql_query("SELECT * FROM Actor ORDER BY first ASC", $db_connection);
 
                 echo "Select Actor: ";
                 echo "<select name='actor' class='styled-select'>";
                 while ($row = mysql_fetch_array($result)) {
-                    echo "<option value='" . $row['name'] . "'>" . $row['name'] . "</option>";
+                    echo "<option value='" . $row['id'] . "'>" . $row['first'] . ' ' . $row['last'] . ' ' . '('. $row['dob'] . ')' . "</option>";
                 }
                 echo "</select>";
                 echo "<br />";
@@ -63,21 +63,9 @@
             <br /><br /><br />
         </form>
         <?php
-            $movie_name = $_POST["movie"];
-            $actor_name = $_POST["actor"];
+            $mid = $_POST["movie"];
+            $aid = $_POST["actor"];
             $role = $_POST["role"];
-
-            $movie_id = mysql_query("SELECT id FROM Movie WHERE title='$movie_name';", $db_connection);
-            $row = mysql_fetch_assoc($movie_id);
-            $mid = $row['id'];
-            // var_dump($mid);
-            print "<br />";
-
-
-            $actor_id = mysql_query("SELECT id FROM Actor WHERE CONCAT(first,' ',last) = '$actor_name';", $db_connection);
-            $row = mysql_fetch_assoc($actor_id);
-            $aid = $row['id'];
-            // var_dump($aid);
             
             $result=mysql_query("INSERT INTO MovieActor VALUES($mid, $aid, '$role');", $db_connection);
             if ($result) {
