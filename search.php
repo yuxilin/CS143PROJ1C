@@ -22,7 +22,7 @@
                 <li><a href="comments.php">IN YOUR OPINION...</a></li>
             </ul>
         </div>
-    <div id="home-maincontent">
+    <div id="maincontent">
     </div>
 </body>
 
