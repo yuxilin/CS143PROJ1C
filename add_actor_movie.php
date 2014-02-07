@@ -15,7 +15,7 @@
                 <li><a href="">PEOPLE DIRECTORY</a></li>
                 <li><a href="">MOVIE DIRECTORY</a></li>
                 <li><a href="add_actor_movie.php">ACTORS+MOVIES</a></li>
-                <li><a href="">DIRECTORS+MOVIES</a></li>
+                <li><a href="add_director_movie.php">DIRECTORS+MOVIES</a></li>
                 <li><a href="add_person.php">ADD PEOPLE</a></li>
                 <li><a href="add_movie.php">ADD MOVIE</a></li>
                 <li><a href="">IN YOUR OPINION...</a></li>
@@ -67,12 +67,17 @@
             $aid = $_POST["actor"];
             $role = $_POST["role"];
             
-            $result=mysql_query("INSERT INTO MovieActor VALUES($mid, $aid, '$role');", $db_connection);
-            if ($result) {
-                print "<h2>Inserted Movie-Actor Relation</h2>";
+            if ($mid==NULL && $aid==NULL) {
+                print "";
             }
             else {
-                print "Something Went Wrong! :(";
+                $result=mysql_query("INSERT INTO MovieActor VALUES($mid, $aid, '$role');", $db_connection);
+                if ($result) {
+                    print "<h2>Inserted Movie-Actor Relation</h2>";
+                }
+                else {
+                    print "Something Went Wrong! :(";
+                }
             }
             mysql_close($db_connection);
         ?>

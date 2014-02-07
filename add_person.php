@@ -15,8 +15,8 @@
                 <li><a href="">SEARCH</a></li>
                 <li><a href="">PEOPLE DIRECTORY</a></li>
                 <li><a href="">MOVIE DIRECTORY</a></li>
-                <li><a href="">ACTORS+MOVIES</a></li>
-                <li><a href="">DIRECTORS+MOVIES</a></li>
+                <li><a href="add_actor_movie.php">ACTORS+MOVIES</a></li>
+                <li><a href="add_director_movie.php">DIRECTORS+MOVIES</a></li>
                 <li><a href="add_person.php">ADD PEOPLE</a></li>
                 <li><a href="add_movie.php">ADD MOVIE</a></li>
                 <li><a href="">IN YOUR OPINION...</a></li>
@@ -154,6 +154,7 @@
             <div class="center-align">
             <input class="styled-submit" type="submit" value="Submit">
             </div>
+        </div>
         <br /><br /><br />
 <?php
     /////////////////////////////////////////////////////
@@ -170,6 +171,7 @@
     $month_of_birth = $_POST["month_of_birth"];
     $day_of_birth = $_POST["day_of_birth"];
     $year_of_birth = $_POST["year_of_birth"];
+
     $dob = $year_of_birth."-".$month_of_birth."-".$day_of_birth;
 
     $month_of_death= $_POST["month_of_death"];
@@ -192,8 +194,13 @@
     $row = mysql_fetch_assoc($result_person);
 
 
+
     if($profession == "director")
-    {
+    {   
+        if (!is_numeric($year_of_birth)) {
+            print '<h3 style="text-align: center">Please Enter a Valid Year of Birth</h3>';
+            return;
+        }
         $person_id = $row['id'] + 1;
         if($dod == NULL)
         {   
@@ -216,6 +223,10 @@
     }
     else if($profession == "actor")
     {
+        if (!is_numeric($year_of_birth)) {
+            print '<h3 style="text-align: center">Please Enter a Valid Year of Birth</h3>';
+            return;
+        }
         $person_id = $row['id'] + 1;
         if($dod == NULL)
         {

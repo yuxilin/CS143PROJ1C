@@ -37,6 +37,7 @@
 
                 echo "Select Movie: ";
                 echo "<select name='movie' class='styled-select'>";
+                // echo "<option value='na'>Select Movie</option>";
                 while ($row = mysql_fetch_array($result)) {
                     echo "<option value='" . $row['id'] . "'>" . $row['title'] . ' '. '(' . $row['year'] . ')' . "</option>";
                 }
@@ -47,6 +48,7 @@
 
                 echo "Select Director: ";
                 echo "<select name='director' class='styled-select'>";
+                // echo "<option value='na'>Select Director</option>";
                 while ($row = mysql_fetch_array($result)) {
                     echo "<option value='" . $row['id'] . "'>" . $row['first'] . ' ' . $row['last'] . ' ' . '('. $row['dob'] . ')' . "</option>";
                 }
@@ -63,16 +65,22 @@
         <?php
             $mid = $_POST["movie"];
             $did = $_POST["director"];
-            var_dump($mid);
-            print "<br />";
-            var_dump($did);
-            
-            $result=mysql_query("INSERT INTO MovieDirector VALUES($mid, $did);", $db_connection);
-            if ($result) {
-                print "<h2>Inserted Movie-Director Relation</h2>";
+            // var_dump($mid);
+            // print "<br />";
+            // var_dump($did);
+
+            if ($mid==NULL && $did==NULL) {
+                print "";
             }
-            else {
-                print "Something Went Wrong! :(";
+            else
+            {
+                $result=mysql_query("INSERT INTO MovieDirector VALUES($mid, $did);", $db_connection);
+                if ($result) {
+                    print "<h2>Inserted Movie-Director Relation</h2>";
+                }
+                else {
+                    print "Something Went Wrong! :(";
+                }
             }
             mysql_close($db_connection);
         ?>

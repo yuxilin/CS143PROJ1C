@@ -14,8 +14,8 @@
                 <li><a href="">SEARCH</a></li>
                 <li><a href="">PEOPLE DIRECTORY</a></li>
                 <li><a href="">MOVIE DIRECTORY</a></li>
-                <li><a href="">ACTORS+MOVIES</a></li>
-                <li><a href="">DIRECTORS+MOVIES</a></li>
+                <li><a href="add_actor_movie.php">ACTORS+MOVIES</a></li>
+                <li><a href="add_director_movie.php">DIRECTORS+MOVIES</a></li>
                 <li><a href="add_person.php">ADD PEOPLE</a></li>
                 <li><a href="add_movie.php">ADD MOVIE</a></li>
                 <li><a href="">IN YOUR OPINION...</a></li>
@@ -105,8 +105,9 @@
 
         <div class="separator">
             <div class="center-align">
-                <input class="styled-submit" type="submit" value="Submit">
+                <input class="styled-submit" id="hoverable" type="submit" value="Submit">
             </div>
+        </div>
         <br /><br /><br />
 
     <?php
