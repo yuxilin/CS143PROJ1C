@@ -22,7 +22,7 @@
                 <li><a href="comments.php">IN YOUR OPINION...</a></li>
             </ul>
             <form action="search.php" method="post">
-                <input class="styled-tbox" type="text" name="search_value" value="Search" maxlength="4" type="number" onfocus="if(this.value == 'Search') { this.value = ''; }"> <br />
+                <input class="styled-tbox" type="text" name="search_value" value="Search" onfocus="if(this.value == 'Search') { this.value = ''; }"> <br />
                 <input type="submit" value="Search">
                 <?php
                     $search_input = $_POST['search_value'];
@@ -37,19 +37,20 @@
                     $db_connection = mysql_connect('localhost', 'cs143', '');
                     mysql_select_db('CS143', $db_connection);
 
-                    $query_actor = mysqL_query("SELECT * FROM Actor WHERE (SELECT CONCAT(first, ' ', last) AS name FROM Actor) LIKE '%$search_input%' ;", $db_connection);
+                    // $query_actor = mysqL_query
+                    $query_actor = mysql_query("SELECT CONCAT(first, ' ', last) AS name, dob FROM Actor WHERE CONCAT(first, ' ', last) LIKE '%$search_input';", $db_connection);
                     $query_movie = mysql_query("SELECT * FROM Movie WHERE title LIKE '%$search_input%' ;", $db_connection);
                 ?>
             </form>
         </div>
     <div id="maincontent">
         <?php
-            var_dump($query_actor);
+            // var_dump($query_actor);
             echo "<br />";
             echo "You Searched ['$search_input'] From Actor Database: ";
             while ($row = mysql_fetch_array($query_actor)) {
                 echo "<div>";
-                    echo "Actor: " . $row['first'] . ' '. $row['last'] . ' '. '(' . $row['dob'] . ')';
+                    echo "Actor: " . $row['name'] . ' '. '(' . $row['dob'] . ')';
                 echo "</div>";
             }
             echo "<br />";
