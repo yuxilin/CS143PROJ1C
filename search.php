@@ -45,23 +45,26 @@
         </div>
     <div id="maincontent">
         <?php
-            // var_dump($query_actor);
-            echo "<br />";
-            echo "You Searched ['$search_input'] From Actor Database: ";
-            while ($row = mysql_fetch_array($query_actor)) {
-                echo "<div>";
-                    echo "Actor: " . $row['name'] . ' '. '(' . $row['dob'] . ')';
-                echo "</div>";
-            }
-            echo "<br />";
 
-            echo "You Searched ['$search_input'] From Movie Database: ";
-            while ($row = mysql_fetch_array($query_movie)) {
-                echo "<div>";
-                    echo "Movie: " . $row['title'] . ' ' . '(' . $row['year'] . ')';
-                echo "</div>";
+            if ($search_input != '') {
+                echo "<br />";
+                echo "You Searched ['$search_input'] From Actor Database: ";
+                while ($row = mysql_fetch_array($query_actor)) {
+                    echo "<div>";
+                        echo "Actor: " . $row['name'] . ' '. '(' . $row['dob'] . ')';
+                    echo "</div>";
+                }
+                echo "<br />";
+
+                echo "You Searched ['$search_input'] From Movie Database: ";
+                while ($row = mysql_fetch_array($query_movie)) {
+                    echo "<div>";
+                        echo "Movie: " . $row['title'] . ' ' . '(' . $row['year'] . ')';
+                    echo "</div>";
+                }
+                echo "<br />";
             }
-            echo "<br />";
+
 
             mysql_close($db_connection);
         ?>
