@@ -23,6 +23,28 @@
             </ul>
         </div>
     <div id="maincontent">
+        <?php
+
+            $db_connection = mysql_connect('localhost', 'cs143', '');
+            mysql_select_db('CS143', $db_connection);
+
+            $default_movie_query = mysql_query("SELECT * FROM Movie WHERE id=2978", $db_connection);
+            $m_row = mysql_fetch_assoc($default_movie_query);
+
+            $default_movie_query = mysql_query("SELECT * FROM Director WHERE id=12391");
+            $d_row = mysql_fetch_assoc($default_movie_query);
+            
+            $default_actors_query = mysql_query("SELECT * FROM MovieActor WHERE id = 2978");
+            $a_row = mysql_fetch_array($default_actors_query)
+
+            echo "-- Movie Info -- <br />";
+            echo "Title: " . $m_row['title'] . ' ' . '(' . $m_row['year'] . ')' . "<br />";
+            echo "Producer: " . $m_row['company'] . "<br />";
+            echo "MPAA Rating: " . $m_row['rating'] . "<br />";
+            echo "Director: " . $d_row['first'] . ' ' . $d_row['last'] . "<br />";
+
+            mysql_close($db_connection);
+        ?>
     </div>
 </body>
 

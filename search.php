@@ -37,7 +37,6 @@
                     $db_connection = mysql_connect('localhost', 'cs143', '');
                     mysql_select_db('CS143', $db_connection);
 
-                    // $query_actor = mysqL_query
                     $query_actor = mysql_query("SELECT CONCAT(first, ' ', last) AS name, dob FROM Actor WHERE CONCAT(first, ' ', last) LIKE '%$search_input';", $db_connection);
                     $query_movie = mysql_query("SELECT * FROM Movie WHERE title LIKE '%$search_input%' ;", $db_connection);
                 ?>
