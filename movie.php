@@ -12,7 +12,6 @@
             <h2>MAP</h2>
             <ul id="nav-options">
                 <li><a href="homepage.php">HOME</a></li>
-                <li><a href="search.php">SEARCH</a></li>
                 <li><a href="people.php">PEOPLE DIRECTORY</a></li>
                 <li><a href="movie.php">MOVIE DIRECTORY</a></li>
                 <li><a href="add_actor_movie.php">ACTORS+MOVIES</a></li>
@@ -21,6 +20,10 @@
                 <li><a href="add_movie.php">ADD MOVIE</a></li>
                 <li><a href="comments.php">IN YOUR OPINION...</a></li>
             </ul>
+            <form action="search.php" method="post">
+                <input class="styled-tbox" type="text" name="search_value" value="Search" onfocus="if(this.value == 'Search') { this.value = ''; }"> <br />
+                <input type="submit" value="Search">
+            </form>
         </div>
     <div id="maincontent">
         <?php
@@ -34,14 +37,22 @@
             $default_movie_query = mysql_query("SELECT * FROM Director WHERE id=12391");
             $d_row = mysql_fetch_assoc($default_movie_query);
             
-            $default_actors_query = mysql_query("SELECT * FROM MovieActor WHERE id = 2978");
-            $a_row = mysql_fetch_array($default_actors_query)
-
             echo "-- Movie Info -- <br />";
             echo "Title: " . $m_row['title'] . ' ' . '(' . $m_row['year'] . ')' . "<br />";
             echo "Producer: " . $m_row['company'] . "<br />";
             echo "MPAA Rating: " . $m_row['rating'] . "<br />";
             echo "Director: " . $d_row['first'] . ' ' . $d_row['last'] . "<br />";
+
+            echo "<br /><br /><br />";
+            echo "-- Actors -- <br />";
+            $default_actors_query = mysql_query("SELECT aid, role FROM MovieActor WHERE mid = 2978");
+            while ($a_row = mysql_fetch_array($default_actors_query, $db_connection)) {
+                $default_actors_result = mysql_query("SELECT * FROM Actor WHERE id='$a_row[0]'") or die("Error: " . mysql_error());
+                $row = mysql_fetch_assoc ($default_actors_result);
+                $a_row[1] = trim($a_row[1]);
+                echo $row['first'] . ' ' . $row['last'] . ' as "' . $a_row[1] . '"<br />' ;
+            }
+
 
             mysql_close($db_connection);
         ?>

@@ -12,7 +12,6 @@
             <h2>MAP</h2>
             <ul id="nav-options">
                 <li><a href="homepage.php">HOME</a></li>
-                <li><a href="search.php">SEARCH</a></li>
                 <li><a href="people.php">PEOPLE DIRECTORY</a></li>
                 <li><a href="movie.php">MOVIE DIRECTORY</a></li>
                 <li><a href="add_actor_movie.php">ACTORS+MOVIES</a></li>
