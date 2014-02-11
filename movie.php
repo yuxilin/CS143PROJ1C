@@ -30,8 +30,8 @@
             $db_connection = mysql_connect('localhost', 'cs143', '');
             mysql_select_db('CS143', $db_connection);
 
-            if(isset($_GET['mid'])) {
-                $mid = $_GET['mid'];
+            if(isset($_GET['id'])) {
+                $mid = $_GET['id'];
                 $dynamic_movie_query = mysql_query("SELECT * FROM Movie WHERE id=$mid", $db_connection);
                 $m_row = mysql_fetch_assoc($dynamic_movie_query);
 
@@ -41,6 +41,9 @@
                 $did = $did['did'];
                 $dynamic_movie_query = mysql_query("SELECT * FROM Director WHERE id=$did", $db_connection) or die( "Error: " . mysql_error());
                 $d_row = mysql_fetch_assoc($dynamic_movie_query);
+
+                $default_actors_query = mysql_query("SELECT aid, role FROM MovieActor WHERE mid =$mid");
+
             }
             else{
                 $default_movie_query = mysql_query("SELECT * FROM Movie WHERE id=2978", $db_connection);
@@ -48,6 +51,9 @@
 
                 $default_movie_query = mysql_query("SELECT * FROM Director WHERE id=12391");
                 $d_row = mysql_fetch_assoc($default_movie_query);
+
+                $default_actors_query = mysql_query("SELECT aid, role FROM MovieActor WHERE mid = 2978");
+
             }    
 
             echo "-- Movie Info -- <br />";
@@ -58,12 +64,11 @@
 
             echo "<br /><br /><br />";
             echo "-- Actors -- <br />";
-            $default_actors_query = mysql_query("SELECT aid, role FROM MovieActor WHERE mid = 2978");
             while ($a_row = mysql_fetch_array($default_actors_query, $db_connection)) {
                 $default_actors_result = mysql_query("SELECT * FROM Actor WHERE id='$a_row[0]'") or die("Error: " . mysql_error());
                 $row = mysql_fetch_assoc ($default_actors_result);
                 $a_row[1] = trim($a_row[1]);
-                echo $row['first'] . ' ' . $row['last'] . ' as "' . $a_row[1] . '"<br />' ;
+                echo "<a href= 'people.php?id=" . urlencode( $row['id'] ) . "'>" . $row['first']. " ". $row['last']."</a>" . ' as "' . $a_row[1] . '"<br />' ;
             }
 
             

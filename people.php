@@ -31,38 +31,43 @@
             $db_connection = mysql_connect('localhost', 'cs143', '');
             mysql_select_db('CS143', $db_connection);
 
-            if(isset($_GET['aid'])) {
-                $aid = $_GET['aid'];
-                $dynamic_actor_query = mysql_query("SELECT * FROM Actor WHERE id=$aid", $db_connection);
-                $a_row = mysql_fetch_assoc($dynamic_actor_query);
-            }
-            else{
-                $default_actor_query = mysql_query("SELECT * FROM Actor WHERE id=12278", $db_connection);
+            if (isset($_GET['id'])) {
+                $id = $_GET['id'];
+                $default_actor_query = mysql_query("SELECT * FROM Actor WHERE id='$id'", $db_connection);
                 $a_row = mysql_fetch_assoc($default_actor_query);
+                $default_movies_query = mysql_query("SELECT mid, role FROM MovieActor WHERE aid = '$id'");
             }
             
-            echo "-- Actor Info -- <br />";
-            echo "Name: " . $a_row['first'] . ' ' . $a_row['last'] . "<br />";
-            echo "Sex: " . $a_row['sex'] . "<br />";
-            echo "Date of Birth: " . $a_row['dob'] . "<br />";
-
-            if (is_null($a_row['dod'])) {
-                echo "Date of Death: Still Alive";
-            }
             else {
-                echo "Date of Death: " . $a_row['dod'] . "<br />";
-            }
+                $default_actor_query = mysql_query("SELECT * FROM Actor WHERE id=12278", $db_connection);
+                $a_row = mysql_fetch_assoc($default_actor_query);
+                $default_movies_query = mysql_query("SELECT mid, role FROM MovieActor WHERE aid = 12278");
 
-            echo "<br /><br /><br />";
-            echo "-- Movies -- <br />";
-            $default_movies_query = mysql_query("SELECT mid, role FROM MovieActor WHERE aid = 12278");
-            while ($m_row = mysql_fetch_array($default_movies_query, $db_connection)) {
-                $default_movies_result = mysql_query("SELECT * FROM Movie WHERE id='$m_row[0]'") or die("Error: " . mysql_error());
-                $row = mysql_fetch_assoc ($default_movies_result);
-                $m_row[1] = trim($m_row[1]);
-                echo '"' . $m_row[1] . '"' . " in " . $row['title'] . "<br />";
             }
+                echo "-- Actor Info -- <br />";
+                echo "Name: " . $a_row['first'] . ' ' . $a_row['last'] . "<br />";
+                echo "Sex: " . $a_row['sex'] . "<br />";
+                echo "Date of Birth: " . $a_row['dob'] . "<br />";
 
+                if (is_null($a_row['dod'])) {
+                    echo "Date of Death: Still Alive";
+                }
+                else {
+                    echo "Date of Death: " . $a_row['dod'] . "<br />";
+                }
+
+                echo "<br /><br /><br />";
+                echo "-- Movies -- <br />";
+                while ($m_row = mysql_fetch_array($default_movies_query, $db_connection)) {
+                    $default_movies_result = mysql_query("SELECT * FROM Movie WHERE id='$m_row[0]'") or die("Error: " . mysql_error());
+                    $row = mysql_fetch_assoc ($default_movies_result);
+                    $m_row[1] = trim($m_row[1]);
+                    echo '"' . $m_row[1] . '"' . " in " . "<a href= 'movie.php?id=" . urlencode( $row['id'] ) . "'>" . $row['title']. "</a>" . "<br />";
+
+                    // echo "<a href= 'movie.php?id=" . urlencode( $row['id'] ) . "'>" . $row['title']. "</a>" . ' as "' . $a_row[1] . '"<br />' ;
+
+                }
+            
 
             mysql_close($db_connection);
         ?>
