@@ -27,16 +27,29 @@
         </div>
     <div id="maincontent">
         <?php
-
             $db_connection = mysql_connect('localhost', 'cs143', '');
             mysql_select_db('CS143', $db_connection);
 
-            $default_movie_query = mysql_query("SELECT * FROM Movie WHERE id=2978", $db_connection);
-            $m_row = mysql_fetch_assoc($default_movie_query);
+            if(isset($_GET['mid'])) {
+                $mid = $_GET['mid'];
+                $dynamic_movie_query = mysql_query("SELECT * FROM Movie WHERE id=$mid", $db_connection);
+                $m_row = mysql_fetch_assoc($dynamic_movie_query);
 
-            $default_movie_query = mysql_query("SELECT * FROM Director WHERE id=12391");
-            $d_row = mysql_fetch_assoc($default_movie_query);
-            
+                $did = mysql_query("SELECT did FROM MovieDirector WHERE mid=$mid", $db_connection);
+                $did = mysql_fetch_assoc($did);
+
+                $did = $did['did'];
+                $dynamic_movie_query = mysql_query("SELECT * FROM Director WHERE id=$did", $db_connection) or die( "Error: " . mysql_error());
+                $d_row = mysql_fetch_assoc($dynamic_movie_query);
+            }
+            else{
+                $default_movie_query = mysql_query("SELECT * FROM Movie WHERE id=2978", $db_connection);
+                $m_row = mysql_fetch_assoc($default_movie_query);
+
+                $default_movie_query = mysql_query("SELECT * FROM Director WHERE id=12391");
+                $d_row = mysql_fetch_assoc($default_movie_query);
+            }    
+
             echo "-- Movie Info -- <br />";
             echo "Title: " . $m_row['title'] . ' ' . '(' . $m_row['year'] . ')' . "<br />";
             echo "Producer: " . $m_row['company'] . "<br />";
@@ -53,6 +66,7 @@
                 echo $row['first'] . ' ' . $row['last'] . ' as "' . $a_row[1] . '"<br />' ;
             }
 
+            
 
             mysql_close($db_connection);
         ?>

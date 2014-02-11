@@ -31,9 +31,15 @@
             $db_connection = mysql_connect('localhost', 'cs143', '');
             mysql_select_db('CS143', $db_connection);
 
-            $default_actor_query = mysql_query("SELECT * FROM Actor WHERE id=12278", $db_connection);
-            $a_row = mysql_fetch_assoc($default_actor_query);
-
+            if(isset($_GET['aid'])) {
+                $aid = $_GET['aid'];
+                $dynamic_actor_query = mysql_query("SELECT * FROM Actor WHERE id=$aid", $db_connection);
+                $a_row = mysql_fetch_assoc($dynamic_actor_query);
+            }
+            else{
+                $default_actor_query = mysql_query("SELECT * FROM Actor WHERE id=12278", $db_connection);
+                $a_row = mysql_fetch_assoc($default_actor_query);
+            }
             
             echo "-- Actor Info -- <br />";
             echo "Name: " . $a_row['first'] . ' ' . $a_row['last'] . "<br />";
