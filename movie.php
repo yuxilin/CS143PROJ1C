@@ -148,6 +148,7 @@
                     echo "Comment: " . $display['comment'] . "<br /><br />";
                 }            
             }
+            mysql_close($db_connection);
         ?>
     </div>
     </div>
