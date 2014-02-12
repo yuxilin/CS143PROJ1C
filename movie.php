@@ -80,7 +80,9 @@
             mysql_close($db_connection);
         ?>
 
-        <form action="movie.php" method="post">
+        <?php
+            echo "<form action='movie.php?id=" . $mid . "' method='post'>" ;
+        ?>
                 <br /> Insert Your Review: <br />
                 <input class="styled-tbox" type="text" name="reviewer" value="Your Name" onfocus="if(this.value == 'Search') { this.value = ''; }"> 
                 <input type="range" min="1" max="5" value="1" step="1" name="rating" list="rating"> 
@@ -109,18 +111,19 @@
             $rating = $_POST['rating'];
 
             $time  = time();
+            if ($reviewer != "Your Name" && $reviewer != "") {
+                $insert_comment_query = mysql_query("INSERT INTO Review (name, mid, rating, comment) VALUES('$reviewer', $mid, $rating, '$comment_input');", $db_connection) or die( "Error: " . mysql_error());
+                if($insert_comment_query)
+                {
+                    echo "Comment Saved! <br />";
+                }
+                else
+                {
+                    echo "You dun goofed! <br />";
+                }
+            }
 
-            $insert_comment_query = mysql_query("INSERT INTO Review VALUES('$reviewer', CURTIME(), $mid, $rating," ."$comment_input".");", $db_connection) or die( "Error: " . mysql_error());
-            //$insert_comment_query = mysql_query("INSERT INTO Review (name, mid, rating, comment) VALUES('$reviewer', $mid, $rating, '$comment_input');", $db_connection);
-            var_dump($insert_comment_query);
-            if($insert_comment_query)
-            {
-                echo "Comment Saved! <br />";
-            }
-            else
-            {
-                echo "You dun goofed! <br />";
-            }
+
             mysql_close($db_connection);
         ?>
     </div>
