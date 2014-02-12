@@ -75,12 +75,13 @@ input[type="submit"]:hover{
 }
 
 .styled-select {
-    padding: 10px 16px;
+    padding: 5px 8px;
+    /*padding: 0px;*/
     border: none;
     box-shadow: none;
     background: #363636;
     color: white;
-    width: 120px;
+    /*width: 120px;*/
     height: 30px;
 }
 
@@ -93,7 +94,7 @@ input[type="submit"]:hover{
 	margin-left: 20px;
 	padding: 20px;
 	overflow:auto;
-/*height:1%;*/
+	min-width: 800px;
 }
 
 #home-maincontent {
@@ -132,6 +133,7 @@ input[type="submit"]:hover{
 	margin-right: 20px;
 	padding: 20px;
 	text-align: right;
+	min-width: 200px;
 }
 
 ul {
