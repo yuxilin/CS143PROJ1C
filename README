@@ -41,3 +41,5 @@ TAKE NOTE:
 The "Submit Review" button on the movie information page has the same functionality as "Add Comment", we just decided to name it "Submit Review"
 
 When creating the tables and loading the files, be sure to run the commands in the directory contain load.sql and create.sql
+
+The site looks best in fullscreen
