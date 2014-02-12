@@ -36,7 +36,7 @@
                     $db_connection = mysql_connect('localhost', 'cs143', '');
                     mysql_select_db('CS143', $db_connection);
 
-                    $query_actor = mysql_query("SELECT CONCAT(first, ' ', last) AS name, dob FROM Actor WHERE CONCAT(first, ' ', last) LIKE '%$search_input';", $db_connection);
+                    $query_actor = mysql_query("SELECT CONCAT(first, ' ', last) AS name, dob, id FROM Actor WHERE CONCAT(first, ' ', last) LIKE '%$search_input';", $db_connection);
                     $query_movie = mysql_query("SELECT * FROM Movie WHERE title LIKE '%$search_input%' ;", $db_connection);
                 ?>
             </form>
@@ -49,7 +49,8 @@
                 echo "You Searched ['$search_input'] From Actor Database: ";
                 while ($row = mysql_fetch_array($query_actor)) {
                     echo "<div>";
-                        echo "Actor: " . $row['name'] . ' '. '(' . $row['dob'] . ')';
+                        echo "Actor: " . "<a href= 'people.php?id=" . urlencode( $row['id'] ) . "'>" . $row['name']. "</a>" . "<br />";
+                        //echo "Actor: " . $row['name'] . ' '. '(' . $row['dob'] . ')';
                     echo "</div>";
                 }
                 echo "<br />";
@@ -57,7 +58,8 @@
                 echo "You Searched ['$search_input'] From Movie Database: ";
                 while ($row = mysql_fetch_array($query_movie)) {
                     echo "<div>";
-                        echo "Movie: " . $row['title'] . ' ' . '(' . $row['year'] . ')';
+                        echo "Movie: " . "<a href= 'movie.php?id=" . urlencode( $row['id'] ) . "'>" . $row['title']. ' '. '(' . $row['year'] . ')' ."</a>" . "<br />";
+                        //echo "Movie: " . $row['title'] . ' ' . '(' . $row['year'] . ')';
                     echo "</div>";
                 }
                 echo "<br />";
