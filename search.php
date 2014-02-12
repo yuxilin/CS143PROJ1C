@@ -35,7 +35,7 @@
                     $db_connection = mysql_connect('localhost', 'cs143', '');
                     mysql_select_db('CS143', $db_connection);
 
-                    $query_actor = mysql_query("SELECT CONCAT(first, ' ', last) AS name, dob, id FROM Actor WHERE CONCAT(first, ' ', last) LIKE '%$search_input';", $db_connection);
+                    $query_actor = mysql_query("SELECT CONCAT(first, ' ', last) AS name, dob, id FROM Actor WHERE CONCAT(first, ' ', last) LIKE '%$search_input%';", $db_connection);
                     $query_movie = mysql_query("SELECT * FROM Movie WHERE title LIKE '%$search_input%' ;", $db_connection);
                 ?>
             </form>
@@ -48,7 +48,7 @@
                 echo "You Searched ['$search_input'] From Actor Database: ";
                 while ($row = mysql_fetch_array($query_actor)) {
                     echo "<div>";
-                        echo "Actor: " . "<a href= 'people.php?id=" . urlencode( $row['id'] ) . "'>" . $row['name']. "</a>" . "<br />";
+                        echo "Actor: " . "<a href= 'people.php?id=" . urlencode( $row['id'] ) . "'>" . $row['name']. ' ' . '(' . $row['dob'] . ')' . "</a>" . "<br />";
                         //echo "Actor: " . $row['name'] . ' '. '(' . $row['dob'] . ')';
                     echo "</div>";
                 }
