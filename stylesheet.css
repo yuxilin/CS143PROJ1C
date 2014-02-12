@@ -29,6 +29,11 @@ div, #header {
 .separator {
     padding: 10px;
 }
+
+.left-aligned {
+	text-align: left;
+	padding: 20px;
+}
     
 .styled-tbox {
     width: 120px;

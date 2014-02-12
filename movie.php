@@ -128,10 +128,28 @@
                     echo "You dun goofed! <br />";
                 }
             }
-
-
             mysql_close($db_connection);
         ?>
+
+        <div class="separator">
+            -- Reviews --
+        </div>
+        <div class="left-aligned">
+        <?php 
+            $db_connection = mysql_connect('localhost', 'cs143', '');
+            mysql_select_db('CS143', $db_connection);
+
+            $display_comment_query = mysql_query("SELECT * FROM Review WHERE mid=$mid;", $db_connection);
+            if ($display_comment_query) {
+                while ($display=mysql_fetch_assoc($display_comment_query)) {
+                    echo "Reviewer: " . $display['name'] . "<br />";
+                    echo "Time of Review: " . $display['time'] . " ";
+                    echo "Rating: " . $display['rating']. "<br />";
+                    echo "Comment: " . $display['comment'] . "<br /><br />";
+                }            
+            }
+        ?>
+    </div>
     </div>
 </body>
 
