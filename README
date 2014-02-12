@@ -1,0 +1,43 @@
+Yuxi Lin    604 036 196
+Arun Joseph 804 004 769
+
+=====================
+Project Criteria Met:
+=====================
+
+A page to add Directors/Actors
+A page to add Movies
+A page to add Actor and Movie Relations
+A page to add Director and Movie Relations
+A page to display Movie information including the option to add and display Reviews and Rating
+A searchbar in the sidebar to conduct searches, it then displays the search result on the main area
+
+All pages are properly linked so that they redirect to the correct pages e.g. clicking on Actor's name would redirect to his/her info page
+We pretty much implemented all the functionality that was asked for.
+
+=======================
+Team Work Distribution:
+=======================
+Most of the work was distributed fairly even since we met up to do pair programming for the bulk of the project. Otherwise we would ask each other to work
+on certain features/bugs in the website when we couldn't pair program. Yuxi helped Arun learn a lot of php cuz Arun didn't know much.
+
+===============
+Extra Features:
+===============
+The site was styled by Yuxi using CSS. 
+There is a sidebar that is constant navigational nexus throughout the entire website.
+
+========================
+Improvements to be Made:
+========================
+There should be a better way to add Actor/Director - Movie Relations. It's kind of a pain the way it is set up right now.
+Search autocomplete would be a nice feature to implement.
+
+An aspect to improve in terms of teamwork would be to split up features more effeciently
+
+
+
+TAKE NOTE:
+The "Submit Review" button on the movie information page has the same functionality as "Add Comment", we just decided to name it "Submit Review"
+
+When creating the tables and loading the files, be sure to run the commands in the directory contain load.sql and create.sql
