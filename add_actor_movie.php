@@ -57,7 +57,7 @@
                 echo "</select>";
                 echo "<br />";
             ?>
-            <input type="text" class="styled-tbox" name="role" onfocus="if(this.value == 'Movie Title') { this.value = ''; }" maxlength=100 value="Role" required>
+            <input type="text" class="styled-tbox" name="role" onfocus="if(this.value == 'Role') { this.value = ''; }" maxlength=100 value="Role" required>
             <br /><br />
                 <div class="separator">
                 <div class="center-align">
