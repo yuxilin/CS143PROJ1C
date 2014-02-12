@@ -37,13 +37,19 @@
 
                 $did = mysql_query("SELECT did FROM MovieDirector WHERE mid=$mid", $db_connection);
                 $did = mysql_fetch_assoc($did);
-
                 $did = $did['did'];
-                $dynamic_movie_query = mysql_query("SELECT * FROM Director WHERE id=$did", $db_connection) or die( "Error: " . mysql_error());
-                $d_row = mysql_fetch_assoc($dynamic_movie_query);
 
+                if($did == NULL)
+                {
+                    $d_row['first'] = '';
+                    $d_row['last'] = '';   
+                }
+                else{
+                    $dynamic_movie_query = mysql_query("SELECT * FROM Director WHERE id=$did", $db_connection);
+                    $d_row = mysql_fetch_assoc($dynamic_movie_query);
+                }   
                 $default_actors_query = mysql_query("SELECT aid, role FROM MovieActor WHERE mid =$mid");
-
+                
             }
             else{
                 $default_movie_query = mysql_query("SELECT * FROM Movie WHERE id=2978", $db_connection);
