@@ -14,6 +14,7 @@ body {
 	color: white;
 	font-family: verdana, helvetica, sans-serif;
 	font-size: 18px;
+	clear: both;
 }
 
 form {
@@ -91,6 +92,8 @@ input[type="submit"]:hover{
 	height: 700px;
 	margin-left: 20px;
 	padding: 20px;
+	overflow:auto;
+/*height:1%;*/
 }
 
 #home-maincontent {
