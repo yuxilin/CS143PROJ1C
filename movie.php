@@ -6,7 +6,7 @@
 </head>
 
 <body>
-    <h1 id="header">BETTER THAN IMDB</h1>
+    <h1 id="header">Flickfo</h1>
 	<div id="divider"></div>
 	<div id="nav-sidebar">
             <h2>MAP</h2>
@@ -18,7 +18,6 @@
                 <li><a href="add_director_movie.php">DIRECTORS+MOVIES</a></li>
                 <li><a href="add_person.php">ADD PEOPLE</a></li>
                 <li><a href="add_movie.php">ADD MOVIE</a></li>
-                <li><a href="comments.php">IN YOUR OPINION...</a></li>
             </ul>
             <form action="search.php" method="post">
                 <input class="styled-tbox" type="text" name="search_value" value="Search" onfocus="if(this.value == 'Search') { this.value = ''; }"> <br />
@@ -83,20 +82,27 @@
         <?php
             echo "<form action='movie.php?id=" . $mid . "' method='post'>" ;
         ?>
-                <br /> Insert Your Review: <br />
-                <input class="styled-tbox" type="text" name="reviewer" value="Your Name" onfocus="if(this.value == 'Search') { this.value = ''; }"> 
+                <div class="separator">
+                    <br /><br />
+                    Insert Your Review: 
+                </div>
+                <div class="separator">
+                    <input class="styled-tbox" type="text" name="reviewer" value="Your Name" onfocus="if(this.value == 'Your Name') { this.value = ''; }"> 
                 <input type="range" min="1" max="5" value="1" step="1" name="rating" list="rating"> 
-                <datalist id="rating">
-                  <option value="1">
-                  <option value="2">
-                  <option value="3">
-                  <option value="4">
-                  <option value="5">
-                </datalist>
-                <br />
-                <textarea name="comments" maxlength="500" rows="4" cols="50">
-                </textarea> <br />
-                <input type="submit" name="comment-submit" value="Submit Review">
+                    <datalist id="rating">
+                      <option value="1">
+                      <option value="2">
+                      <option value="3">
+                      <option value="4">
+                      <option value="5">
+                    </datalist>
+                </div>
+                <div class="separator">
+                    <textarea name="comments" maxlength="500" rows="4" cols="50"></textarea>
+                </div>                
+                <div class="separator">
+                    <input type="submit" class="styled-submit" name="comment-submit" value="Submit Review">
+                </div>
         </form>
         <?php
             $db_connection = mysql_connect('localhost', 'cs143', '');
