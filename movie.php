@@ -49,6 +49,9 @@
                 }   
                 $default_actors_query = mysql_query("SELECT aid, role FROM MovieActor WHERE mid =$mid");
 
+                $dynamic_rating_query = mysql_query("SELECT AVG(rating) as rating FROM Review WHERE mid = $mid");
+                $r_row = mysql_fetch_assoc($dynamic_rating_query);
+
             }
             else{
                 $default_movie_query = mysql_query("SELECT * FROM Movie WHERE id=2978", $db_connection);
@@ -59,6 +62,8 @@
 
                 $default_actors_query = mysql_query("SELECT aid, role FROM MovieActor WHERE mid = 2978");
 
+                $default_rating_query = mysql_query("SELECT AVG(rating) FROM Review WHERE mid = 2978");
+                $r_row = mysql_fetch_assoc($default_rating_query);
             }    
 
             echo "-- Movie Info -- <br />";
@@ -66,6 +71,7 @@
             echo "Producer: " . $m_row['company'] . "<br />";
             echo "MPAA Rating: " . $m_row['rating'] . "<br />";
             echo "Director: " . $d_row['first'] . ' ' . $d_row['last'] . "<br />";
+            echo "Average Rating: " . round($r_row['rating'], 2);
 
             echo "<br /><br /><br />";
             echo "-- Actors -- <br />";
