@@ -49,7 +49,7 @@
                     $d_row = mysql_fetch_assoc($dynamic_movie_query);
                 }   
                 $default_actors_query = mysql_query("SELECT aid, role FROM MovieActor WHERE mid =$mid");
-                
+
             }
             else{
                 $default_movie_query = mysql_query("SELECT * FROM Movie WHERE id=2978", $db_connection);
@@ -77,8 +77,50 @@
                 echo "<a href= 'people.php?id=" . urlencode( $row['id'] ) . "'>" . $row['first']. " ". $row['last']."</a>" . ' as "' . $a_row[1] . '"<br />' ;
             }
 
-            
+            mysql_close($db_connection);
+        ?>
 
+        <form action="movie.php" method="post">
+                <br /> Insert Your Review: <br />
+                <input class="styled-tbox" type="text" name="reviewer" value="Your Name" onfocus="if(this.value == 'Search') { this.value = ''; }"> 
+                <input type="range" min="1" max="5" value="1" step="1" name="rating" list="rating"> 
+                <datalist id="rating">
+                  <option value="1">
+                  <option value="2">
+                  <option value="3">
+                  <option value="4">
+                  <option value="5">
+                </datalist>
+                <br />
+                <textarea name="comments" maxlength="500" rows="4" cols="50">
+                </textarea> <br />
+                <input type="submit" name="comment-submit" value="Submit Review">
+        </form>
+        <?php
+            $db_connection = mysql_connect('localhost', 'cs143', '');
+            mysql_select_db('CS143', $db_connection);
+
+            $comment_input = $_POST['comments'];
+            $comment_input = trim($comment_input);
+
+            $reviewer = $_POST['reviewer'];
+            $reviewer = trim($reviewer);
+
+            $rating = $_POST['rating'];
+
+            $time  = time();
+
+            $insert_comment_query = mysql_query("INSERT INTO Review VALUES('$reviewer', CURTIME(), $mid, $rating," ."$comment_input".");", $db_connection) or die( "Error: " . mysql_error());
+            //$insert_comment_query = mysql_query("INSERT INTO Review (name, mid, rating, comment) VALUES('$reviewer', $mid, $rating, '$comment_input');", $db_connection);
+            var_dump($insert_comment_query);
+            if($insert_comment_query)
+            {
+                echo "Comment Saved! <br />";
+            }
+            else
+            {
+                echo "You dun goofed! <br />";
+            }
             mysql_close($db_connection);
         ?>
     </div>
